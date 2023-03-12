@@ -23,7 +23,7 @@ const Login = () => {
 
     const signIn = () => {
         if(email && password){
-            Axios.post(`${process.env.BACKEND}/get_user_login`, {
+            Axios.post(`http://localhost:8000/get_user_login`, {
                 email: email,
                 password: password
             }).then((response)=>{
@@ -45,14 +45,14 @@ const Login = () => {
 
     const createAccount = () => {
         if(email && password && name){
-            Axios.post(`${process.env.BACKEND}/verify_user`, {
+            Axios.post(`http://localhost:8000/verify_user`, {
                 email: email
             }).then((response)=>{
                 if(response.data === 'exist'){
                     alert('Essa conta já existe!')
                 }
                 if(response.data === 'not_exist'){
-                    Axios.post(`${process.env.BACKEND}/create_user`, {
+                    Axios.post(`http://localhost:8000/create_user`, {
                         name: name,
                         email: email,
                         password: password

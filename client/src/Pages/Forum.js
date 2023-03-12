@@ -33,7 +33,7 @@ const Forum = () => {
         if (comment) {
             const name = localStorage.getItem('Name')
             const userCode = localStorage.getItem('UserCode')
-            Axios.post('${process.env.BACKEND}/create_comment', {
+            Axios.post(`http://localhost:8000/create_comment`, {
                 content: comment,
                 name: name,
                 userCode: userCode
@@ -53,7 +53,7 @@ const Forum = () => {
 
     const getComments = () => {
         setLoader(true)
-        Axios.get(`${process.env.BACKEND}/comments_list`, {
+        Axios.get(`http://localhost:8000/comments_list`, {
         }).then((response) => {
             setCommentList(response.data)
         }).catch((err) => {
@@ -65,7 +65,7 @@ const Forum = () => {
     const deleteComment = () => {
         if (commentCode !== '') {
             const userCode = localStorage.getItem('UserCode')
-            Axios.delete(`${process.env.BACKEND}/delete_comment/${commentCode}/${userCode}`).then((response) => {
+            Axios.delete(`http://localhost:8000/delete_comment/${commentCode}/${userCode}`).then((response) => {
                 console.log(response)
                 if (response.data === 'Este comentário pertence a outro usuário') {
                     alert(`Falha ao excluir comentário: ${response.data}`)
